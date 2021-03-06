@@ -1,6 +1,13 @@
 # Fast Pony CRUD
 A tool for easily adding database CRUD routes using pony orm and FastAPI. This package works with database definitions isomg the common pony orm data types, but it still needs to be tested on all of them. 
 
+# Installation
+using pip:
+```
+git clone https://github.com/juanborbon93/fast_pony_crud.git
+cd fast_pony_api
+pip install -e .
+```
 # Usage:
 Define your database. You can do this in code, or you can use the [Pony ORM online editor](https://editor.ponyorm.com/). You will end up with a file that looks something like this. save it as "db.py". 
 ```
