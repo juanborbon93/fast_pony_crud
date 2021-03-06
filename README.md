@@ -1,5 +1,5 @@
 # Fast Pony CRUD
-A tool for easily adding database CRUD routes using pony orm and FastAPI. This package works with database definitions isomg the common pony orm data types, but it still needs to be tested on all of them. 
+A tool for easily adding database CRUD routes using pony orm and FastAPI. This package works with database definitions using the common pony orm data types, but it still needs to be tested on all of them. 
 
 # Installation
 using pip:
