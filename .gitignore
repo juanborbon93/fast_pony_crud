@@ -1,3 +1,5 @@
 *.pyc
 *.sqlite
 fast_pony_crud.egg-info/*
+dist/*
+build/*

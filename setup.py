@@ -5,12 +5,12 @@ import os
 with open("README.md", "r") as fh:
     long_description = fh.read()
 
-version = os.getenv("VERSION")
+version = os.environ.get("VERSION","0.0.0")
 setuptools.setup(
     name="fast-pony-crud", # Replace with your own username
     version=version,
     author="MakeHax",
-    author_email="juanborbon93@gmail.com",
+    author_email="info@makehax.com",
     description="Tool for creating crud routes from pony database object",
     long_description=long_description,
     long_description_content_type="text/markdown",
