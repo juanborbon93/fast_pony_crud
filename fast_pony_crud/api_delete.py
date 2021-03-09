@@ -8,6 +8,7 @@ def api_delete(table,entry_kwargs:dict):
     Returns:
         int: status code 
     """    
+    entry_kwargs = {key:val for key,val in entry_kwargs.items() if key!="_api_key"}
     db_entry  = table.get(**entry_kwargs)
     if db_entry is None:
         return 404

@@ -18,7 +18,8 @@ setuptools.setup(
     packages=setuptools.find_packages(),
     install_requires=[
         "pony==0.7.14",
-        "pydantic==1.8"
+        "pydantic==1.8",
+        "fastapi==0.63.0"
     ],
     classifiers=[
         "Programming Language :: Python :: 3",

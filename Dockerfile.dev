@@ -1,0 +1,8 @@
+FROM continuumio/miniconda3
+RUN apt-get update
+RUN conda create --name fast_pony_crud python=3.7 -y
+RUN echo "source activate fast_pony_crud" > ~/.bashrc
+ENV PATH /opt/conda/envs/fast_pony_crud/bin:$PATH
+EXPOSE 5000
+COPY . /
+RUN pip3 install -e .

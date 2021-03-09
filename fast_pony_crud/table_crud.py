@@ -20,7 +20,7 @@ def create_table_crud(table,app,prefix:str="/db",api_key:str=None):
     path_args = [f'{{{pk}}}' for pk in pkey_attr_names]
     get_query_params = []
     api_get_params = []
-    security_parameter = Parameter('api_key',kind=Parameter.POSITIONAL_OR_KEYWORD,annotation=APIKey,default=Depends(get_api_key))
+    security_parameter = Parameter('_api_key',kind=Parameter.POSITIONAL_OR_KEYWORD,annotation=APIKey,default=Depends(get_api_key))
     for col in table._columns_:
         arg_type = table._adict_.get(col).py_type
         if arg_type not in  [dict,ormtypes.Json]:
@@ -52,7 +52,7 @@ def create_table_crud(table,app,prefix:str="/db",api_key:str=None):
     router.delete(f"/{table.__name__}/{'/'.join(path_args)}",summary=f'delete items from {table.__name__} table')(del_func)
     if api_key:
         @router.post(f"/{table.__name__}",summary=f'post items to {table.__name__} table')
-        def post_func(body:get_api_model(table,"POST"),api_key:APIKey=Depends(get_api_key)):
+        def post_func(body:get_api_model(table,"POST"),_api_key:APIKey=Depends(get_api_key)):
             return api_post(table,body)   
     else:
         @router.post(f"/{table.__name__}",summary=f'post items to {table.__name__} table')
@@ -62,7 +62,7 @@ def create_table_crud(table,app,prefix:str="/db",api_key:str=None):
     def put_func(*args,**kwargs):
         pkeys = [i.name for i in table._pk_attrs_]
         entity_pkeys = {i:j for i,j in kwargs.items() if i in pkeys}
-        return api_put(table,new_data = kwargs['body'].__dict__, entity_pkeys = entity_pkeys)
+        return api_put(table,new_data = kwargs['body'], entity_pkeys = entity_pkeys)
     pkey_fun_args = [Parameter(pkey.name,kind=Parameter.POSITIONAL_OR_KEYWORD) for pkey in table._pk_attrs_]
     body_arg = [Parameter("body",kind=Parameter.POSITIONAL_OR_KEYWORD,annotation=get_api_model(table,"PUT"))]
     put_args = pkey_fun_args+body_arg

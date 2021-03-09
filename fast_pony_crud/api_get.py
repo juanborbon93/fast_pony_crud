@@ -12,7 +12,7 @@ def api_get(table,kwargs:dict):
     first_condition = True
     k = {}
     for key,val in kwargs.items():
-        if val is not None:
+        if val is not None and key!="_api_key":
             if type(val)==str:
                 query_val = val
             elif type(val) == UUID:

@@ -1,5 +1,5 @@
 from pony.orm import db_session
-
+from fastapi import HTTPException
 @db_session
 def api_put(table,new_data:dict,entity_pkeys:dict):
     """rest api put method for updating an existing entry
@@ -11,7 +11,9 @@ def api_put(table,new_data:dict,entity_pkeys:dict):
     entity_pkey_names = [pkey.name for pkey in table._pk_attrs_]
     # entry_kwargs = {pkey:kwargs[pkey] for pkey in entity_pkey_names}
     db_entry  = table.get(**entity_pkeys)
-    for col_name,col_val in new_data.items():
+    if db_entry is None:
+        raise HTTPException(status_code=400,detail="")
+    for col_name,col_val in new_data.dict().items():
         if col_name not in entity_pkey_names and col_name in table._columns_:
             if col_val is not None:
                 setattr(db_entry,col_name,col_val)
