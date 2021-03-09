@@ -17,9 +17,9 @@ setuptools.setup(
     url="https://github.com/juanborbon93/fast_pony_crud",
     packages=setuptools.find_packages(),
     install_requires=[
-        "pony==0.7.14",
-        "pydantic==1.8",
-        "fastapi==0.63.0"
+        "pony>=0.7.14",
+        "pydantic>=1.8",
+        "fastapi>=0.63.0"
     ],
     classifiers=[
         "Programming Language :: Python :: 3",
