@@ -21,7 +21,7 @@ def get_api_type(table,col,make_optional=False,prefix:str=""):
         t =  conversion_map[col.py_type]
     if col.py_type in table._database_.entities.values():
         if len(col.py_type._pk_attrs_)==1:
-            return get_api_type(col.py_type,col.py_type._pk_attrs_[0],make_optional=make_optional)
+            return get_api_type(col.py_type,col.py_type._pk_attrs_[0],make_optional=not col.is_required)
         else:
             t =  get_api_model(col.py_type,"GET",name_prefix=f"{table.__name__}_") 
     if col.is_required and make_optional==False:
